@@ -1,0 +1,10 @@
+/__pycache__
+
+# /
+/collab/__pycache__
+
+# /migrations/
+/collab/migrations/__pycache__
+
+# /templatetags/
+/collab/templatetags/__pycache__
