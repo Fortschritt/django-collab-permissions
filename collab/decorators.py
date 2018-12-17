@@ -28,14 +28,16 @@ def space_admin_required(func):
     method decorator raising 403 if user is not a space administrator in the
     current space.
     Mostly identical to the same function from django-spaces, but this one uses
-    is_owner_or_admin
+    is_owner_or_admin and respects superuser privileges
     """
     def _decorator(self, *args, **kwargs):
         if self.user and self.user.is_authenticated():
-            is_allowed = is_space_admin_or_manager(
-                self.user, 
-                self.SPACE
-            )
+            is_allowed = self.user.is_superuser
+            if not is_allowed:
+                is_allowed = is_space_admin_or_manager(
+                    self.user, 
+                    self.SPACE
+                )
             if is_allowed:
                 return func(self, *args, **kwargs)
         raise PermissionDenied
