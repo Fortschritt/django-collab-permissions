@@ -34,3 +34,17 @@ def db_table_exists(table_name):
     table_list = connection.introspection.table_names(cursor)
     return table_name in table_list
 
+def db_table_column_exists(table_name, column_name):
+    """
+    check whether the given column already exists for the given table in the database
+    """
+    cursor = connection.cursor()
+    table_list = connection.introspection.table_names(cursor)
+    if table_name in table_list:
+        field_list = connection.introspection.get_table_description(cursor,table_name)
+        found = False
+        for f in field_list:
+            if f.name == column_name:
+                found = True
+                break
+    return found
