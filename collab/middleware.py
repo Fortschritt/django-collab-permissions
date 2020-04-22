@@ -1,6 +1,8 @@
-class LastActivityMiddleware(object):
+from django.utils.deprecation import MiddlewareMixin
+
+class LastActivityMiddleware(MiddlewareMixin):
     """
-        Middlewate to set timestampe when a user
+        Middleware to set timestamps when a user
         has been last seen
     """
     def process_request(self, request):

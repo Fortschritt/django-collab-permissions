@@ -5,7 +5,7 @@ from django.core.exceptions import PermissionDenied
 from django.utils.functional import wraps
 from guardian.compat import str
 from guardian.exceptions import GuardianError
-from guardian.utils import get_403_or_None
+from guardian.utils import get_40x_or_None
 from .util import is_manager, is_space_admin_or_manager
 
 def manager_required(func=None):
@@ -105,7 +105,7 @@ def permission_required(perm, **kwargs):
             # fetch object for which check would be made
             obj = request.SPACE
 
-            response = get_403_or_None(request, perms=[perm], obj=obj,
+            response = get_40x_or_None(request, perms=[perm], obj=obj,
                 login_url=login_url, redirect_field_name=redirect_field_name,
                 return_403=ret_403, accept_global_perms=accept_global_perms)
             if response:
