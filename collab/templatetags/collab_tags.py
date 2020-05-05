@@ -96,12 +96,12 @@ def verbose_name(value):
 
 @register.filter(name="nice_name")
 def nice_name(value):
-    if not value.is_authenticated():
+    if not value.is_authenticated:
         return ""
     return value.first_name if value.first_name else value.username
 
 @register.filter(name="full_nice_name")
 def full_nice_name(value):
-    if not value.is_authenticated():
+    if not value.is_authenticated:
         return ""
     return value.get_full_name() if value.first_name else value.username

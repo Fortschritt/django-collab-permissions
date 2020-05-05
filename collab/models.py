@@ -7,7 +7,7 @@ from django.utils import timezone
 
 
 class Collab(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     is_manager = models.BooleanField(verbose_name="is Manager", default=False)
     last_activity = models.DateTimeField(default=timezone.now)
 

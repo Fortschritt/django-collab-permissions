@@ -6,5 +6,5 @@ class LastActivityMiddleware(MiddlewareMixin):
         has been last seen
     """
     def process_request(self, request):
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             request.user.collab.update_last_activity()
