@@ -96,7 +96,7 @@ def verbose_name(value):
 
 @register.filter(name="nice_name")
 def nice_name(value):
-    if not value.is_authenticated:
+    if not hasattr(value, "is_authenticated") or not value.is_authenticated:
         return ""
     return value.first_name if value.first_name else value.username
 

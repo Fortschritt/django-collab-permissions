@@ -3,7 +3,6 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import PermissionDenied
 from django.utils.functional import wraps
-from guardian.compat import str
 from guardian.exceptions import GuardianError
 from guardian.utils import get_40x_or_None
 from .util import is_manager, is_space_admin_or_manager
@@ -31,7 +30,7 @@ def space_admin_required(func):
     is_owner_or_admin and respects superuser privileges
     """
     def _decorator(self, *args, **kwargs):
-        if self.user and self.user.is_authenticated():
+        if self.user and self.user.is_authenticated:
             is_allowed = self.user.is_superuser
             if not is_allowed:
                 is_allowed = is_space_admin_or_manager(
@@ -94,12 +93,12 @@ def permission_required(perm, **kwargs):
                 request.user.collab.is_manager and perm in manager_perms:
                 return view_func(request, *args, **kwargs)
 
-            #if not request.user.is_authenticated():
+            #if not request.user.is_authenticated:
             #    do_403 = False # enforce redirect to login for better user
             #                       # experience
             #else:
             #    do_403
-            ret_403 = False if not request.user.is_authenticated() else return_403
+            ret_403 = False if not request.user.is_authenticated else return_403
 
             # if more than one parameter is passed to the decorator we try to
             # fetch object for which check would be made

@@ -4,7 +4,7 @@ def is_manager(user):
     """
     Returns True if user has at least management rights, else False.
     """
-    if user and user.is_authenticated():
+    if user and user.is_authenticated:
         if user.collab.is_manager or user.is_superuser:
             return True
     return False
